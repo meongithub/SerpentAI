@@ -29,6 +29,7 @@ class SpriteLocator:
         if screen_region is not None:
             frame = serpent.cv.extract_region_from_image(frame, screen_region)
 
+
         for i in range(len(constellation_of_pixel_images)):
             constellation_of_pixels_item = list(sprite.constellation_of_pixels[i].items())[0]
 
