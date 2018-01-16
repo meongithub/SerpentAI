@@ -238,7 +238,8 @@ class DQN:
         print(f"CURRENT RANDOM ACTION PROBABILITY: {round(self.epsilon_greedy_q_policy.epsilon * 100.0, 2)}%")
         print(f"LOSS: {self.model_loss}")
 
-    def _initialize_model(self):
+    def _initialize_model(self):        
+        
         input_layer = Input(shape=self.input_shape)
 
         tower_1 = Convolution2D(16, 1, 1, border_mode="same", activation="elu")(input_layer)
@@ -261,6 +262,30 @@ class DQN:
         model.compile(rmsprop(lr=self.model_learning_rate, clipvalue=1), "mse")
 
         return model
+        # input_layer = Input(shape=self.input_shape)
+        # x, y, _ = self.input_shape
+        
+        # tower_1 = Convolution2D(16, 1, 1, border_mode="same", activation="elu")(input_layer)
+        # tower_1 = Convolution2D(16, 3, 3, border_mode="same", activation="elu")(tower_1)
+        # tower_1 = Convolution2D(64, 3, 3, border_mode="same", activation="elu")(tower_1)
+
+        # tower_2 = Convolution2D(16, 1, 1, border_mode="same", activation="elu")(input_layer)
+        # tower_2 = Convolution2D(64, 3, 3, border_mode="same", activation="elu")(tower_2)
+        # tower_2 = Convolution2D(64, 3, 3, border_mode="same", activation="elu")(tower_2)
+
+        # tower_3 = MaxPooling2D((3, 3), strides=(1, 1), border_mode="same")(input_layer)
+        # tower_3 = Convolution2D(64, 1, 1, border_mode="same", activation="elu")(tower_3)
+
+        # merged_layer = merge([tower_1, tower_2, tower_3], mode="concat", concat_axis=1)
+
+        # output = MaxPooling2D((x, y), strides=(x, y))(merged_layer)
+        # output = Flatten()(output)
+        # output = Dense(self.action_count)(output)
+
+        # model = Model(input=input_layer, output=output)
+        # model.compile(rmsprop(lr=self.model_learning_rate, clipvalue=1), "mse")
+
+        # return model
 
     def _generate_action_space_combination_input_mapping(self, input_mapping):
         action_input_mapping = dict()
